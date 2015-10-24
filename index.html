@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.rawgit.com/firstopinion/formatter.js/master/dist/jquery.formatter.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <label for="code">Enter your 25 digit code</label>
+      <input name="code" size="33" id="code" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" style="text-transform: uppercase;">
+    </div>
+    <div id="qr"></div>
+  </body>
+</html>
+
+<script>
+  $(function(){
+    $('#code').formatter({
+      pattern: '{{*****}}-{{*****}}-{{*****}}-{{*****}}-{{*****}}',
+    });
+
+    $('#code').on('blur', function(){
+      $('#qr canvas').remove();
+      $('#qr').qrcode({
+        text: $(this).val().toUpperCase()
+      });
+    });
+  });
+</script>
